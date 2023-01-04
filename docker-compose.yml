@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: custom_admin_container
+    ports:
+      - "8060:8060"
+    volumes:
+      - .:/custom_admin_django
+    command: python manage.py runserver 0.0.0.0:8060
+    networks:
+      - mysql-network
+
+
+networks:
+  mysql-network:
+    external:
+      name: mysql-network
